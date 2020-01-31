@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php 
+session_start();
+?>
 <html>
 	<head>
 		<title> Page de login </title>
@@ -52,9 +55,15 @@
 				AND prenom=\''.$_POST['prenom'].'\' 
 				AND password=\''.$_POST['password'].'\'' );
 				$arrayResultat=$statement->fetch();
-				//echo "is libraire: ";
-				//echo $arrayResultat[0];
-				$_SESSION['libraire'] == $arrayResultat[0];
+				$_SESSION['libraire'] = $arrayResultat[0];
+				$statement=$pdo->query('
+				SELECT idpersonne
+				FROM personnes  
+				WHERE nom=\''.$_POST['nom'].'\' 
+				AND prenom=\''.$_POST['prenom'].'\' 
+				AND password=\''.$_POST['password'].'\'' );
+				$arrayResultat=$statement->fetch();
+				$_SESSION['idpersonne'] = $arrayResultat[0];
 				header("Location:./main.php");
 			} else {
 				echo "mauvaise combinaison login/mot de passe";

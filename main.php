@@ -1,6 +1,9 @@
 <!doctype html>
-
+<?php 
+session_start();
+?>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
 
@@ -8,6 +11,7 @@
   <?php
     include "./init.php"
   ?>
+
   <style>
 table {
   font-family: arial, sans-serif;
@@ -29,6 +33,16 @@ tr:nth-child(even) {
 
 <body>
   <h1>Bienvenue sur notre plateforme</h1>
+  <?php
+	if (!isset($_SESSION['libraire'])) {
+	header("Location:./login.php") ;
+	} elseif ($_SESSION['libraire'] == 0) {
+	echo 'Bonjour cher client !'; 
+	} else { 
+	echo 'Bonjour cher libraire !';
+	}	
+  ?>
+  </br>
   <?php 
     include "./navbar.php";
   ?>
