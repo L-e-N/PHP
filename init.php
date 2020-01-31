@@ -6,3 +6,5 @@ try {
 	die($msg);
 }
 ?>
+session_start();
+
